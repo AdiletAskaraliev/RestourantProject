@@ -40,15 +40,16 @@ public class User  implements UserDetails {
             CascadeType.DETACH
     })
     private Restaurant restaurant;
-    @ManyToOne(
+    @OneToMany(mappedBy = "user",
             cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.REFRESH,
-            CascadeType.DETACH
+            CascadeType.DETACH,
+            CascadeType.REMOVE
     }
     )
-    private Cheque cheque;
+    private List<Cheque> cheques;
 
 
 

@@ -2,11 +2,11 @@ package adilet.service;
 
 import adilet.dto.SimpleResponse;
 import adilet.dto.request.SubcategoryRequest;
-import adilet.dto.response.SubcategoryGroupResponse;
 import adilet.dto.response.SubcategoryResponse;
 import adilet.entity.Subcategory;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SubcategoryService {
     List<Subcategory> findAll();
@@ -20,5 +20,7 @@ public interface SubcategoryService {
     SimpleResponse delete(Long id);
 
     List<SubcategoryResponse> getSubcategoryByCategoryId(Long categoryId);
-    List<SubcategoryGroupResponse>  getGroupSubcategoriesByCategory();
+
+    Map<String, List<SubcategoryResponse>> filterByCategory();
+
 }

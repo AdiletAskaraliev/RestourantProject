@@ -7,10 +7,11 @@ import adilet.entity.MenuItem;
 import adilet.service.MenuItemService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/menuitem")
@@ -47,4 +48,20 @@ public class MenuItemApi {
         return menuItemService.delete(id);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<MenuItem>> globalSearch(
+            @RequestParam("searchTerm") String searchTerm) {
+        List<MenuItem> menuItems = menuItemService.globalSearch(searchTerm);
+        return ResponseEntity.ok(menuItems);
+    }
+
+    @GetMapping("/ascOrDesc")
+    public List<MenuItemResponse> ascOrDesc(@RequestParam("ascOrDesc") String ascOrDesc){
+        return menuItemService.findMenuItemsSortedByPrice(ascOrDesc);
+    }
+
+    @GetMapping("/filter")
+    public List<MenuItemResponse> filterIsVegan(@RequestParam Boolean trueOrFalse){
+        return menuItemService.filterIsVegan(trueOrFalse);
+    }
 }

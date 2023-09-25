@@ -60,4 +60,15 @@ public class GlobalExceptionHandler {
                 .massage(e.getMessage())
                 .build();
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse IllegalArgumentException(IllegalArgumentException e){
+        return ExceptionResponse.builder()
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .exceptionClassName(e.getClass().getSimpleName())
+                .massage(e.getMessage())
+                .build();
+    }
+
 }

@@ -6,6 +6,7 @@ import adilet.dto.response.MenuItemResponse;
 import adilet.entity.MenuItem;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MenuItemService {
     List<MenuItem> findAll();
@@ -17,4 +18,11 @@ public interface MenuItemService {
     SimpleResponse update(Long id, MenuItemRequest menuItemRequest);
 
     SimpleResponse delete(Long id);
+
+    List<MenuItem> globalSearch(String searchTerm);
+
+
+    List<MenuItemResponse> findMenuItemsSortedByPrice(String ascOrDesc);
+
+    List<MenuItemResponse> filterIsVegan(Boolean trueOrFalse);
 }

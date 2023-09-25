@@ -1,5 +1,6 @@
 package adilet.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class Subcategory {
             CascadeType.REFRESH,
             CascadeType.DETACH
     })
+    @JsonManagedReference
     private List<MenuItem> menuItems;
 
 }

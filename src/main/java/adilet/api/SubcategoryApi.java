@@ -6,10 +6,12 @@ import adilet.dto.response.SubcategoryGroupResponse;
 import adilet.dto.response.SubcategoryResponse;
 import adilet.entity.Subcategory;
 import adilet.service.SubcategoryService;
+import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/subcategories")
@@ -49,8 +51,9 @@ public class SubcategoryApi {
         return subcategoryService.getSubcategoryByCategoryId(categoryId);
     }
 
-    @GetMapping("/group")
-    public List<SubcategoryGroupResponse>  getGroupSubcategoriesByCategory(){
-        return subcategoryService.getGroupSubcategoriesByCategory();
+    @PermitAll
+    @GetMapping("/grouping")
+    public Map<String,List<SubcategoryResponse>> filter(){
+        return subcategoryService.filterByCategory();
     }
 }

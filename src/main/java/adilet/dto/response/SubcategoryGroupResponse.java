@@ -4,22 +4,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
 @Builder
 public class SubcategoryGroupResponse {
-    private Long categoryId;
     private String categoryName;
-    private Long subcategoryId;
-    private String subcategoryName;
+    private List<String> subcategoryName;
 
-    public SubcategoryGroupResponse(Long categoryId, String categoryName, Long subcategoryId, String subcategoryName) {
-        this.categoryId = categoryId;
+    public SubcategoryGroupResponse(String categoryName, List<String> subcategoryName) {
         this.categoryName = categoryName;
-        this.subcategoryId = subcategoryId;
         this.subcategoryName = subcategoryName;
     }
-
-
 }
+
+

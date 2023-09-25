@@ -2,7 +2,6 @@ package adilet.service.impl;
 
 import adilet.dto.SimpleResponse;
 import adilet.dto.request.SubcategoryRequest;
-import adilet.dto.response.SubcategoryGroupResponse;
 import adilet.dto.response.SubcategoryResponse;
 import adilet.entity.Category;
 import adilet.entity.Subcategory;
@@ -16,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -95,9 +96,10 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     }
 
     @Override
-    public List<SubcategoryGroupResponse> getGroupSubcategoriesByCategory() {
-     return subcategoryRepository.getGroupedSubcategoriesByCategory();
+    public Map<String, List<SubcategoryResponse>> filterByCategory() {
+        return subcategoryRepository.getAllSb().stream().collect(Collectors.groupingBy(SubcategoryResponse::getCategoryName));
     }
+
 
 }
 

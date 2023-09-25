@@ -5,17 +5,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-
 @Builder
 @Setter
 @Getter
-public class PaginationCategory {
-    private List<CategoryResponse> categoryResponses;
+public class PaginationStopList {
+    private List<StopListResponse> stopListResponses;
     private int currentPage;
     private int size;
 
-    public PaginationCategory(List<CategoryResponse> categoryResponses, int currentPage, int size) {
-        this.categoryResponses = categoryResponses;
+    public PaginationStopList(List<StopListResponse> stopListResponses, int currentPage, int size) {
+        this.stopListResponses = stopListResponses;
         this.currentPage = currentPage;
         this.size = size;
     }

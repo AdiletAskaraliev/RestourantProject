@@ -17,19 +17,11 @@ public interface SubcategoryRepository extends JpaRepository<Subcategory, Long> 
             "from Subcategory s where s.category.id = :id order by s.name")
     List<SubcategoryResponse> findSubcategoriesByCategoryId(Long id);
 
-    @Query(nativeQuery = true,
-            value = "SELECT c.id AS category_id, c.name AS category_name, " +
-                    "s.id AS subcategory_id, s.name AS subcategory_name " +
-                    "FROM Subcategory s " +
-                    "JOIN Category c on c.id =  s.category.id" +
-                    "group by c.id, c.name, s.id, s.name")
-    List<SubcategoryGroupResponse> getGroupedSubcategoriesByCategory();
+    @Query("select new adilet.dto.response.SubcategoryResponse( s.id, s.name, s.category.name) from Subcategory s")
+    List<SubcategoryResponse> getAllSb();
 
-
-
-
-
-
+    @Query("select s.name from Subcategory s join s.category c where c.id = s.id group by s.name ")
+    List<String> subCatName();
 
 
 }

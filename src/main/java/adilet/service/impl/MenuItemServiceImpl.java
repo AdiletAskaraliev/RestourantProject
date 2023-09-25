@@ -109,5 +109,31 @@ public class MenuItemServiceImpl implements MenuItemService {
                 .build();
     }
 
+    @Override
+    public List<MenuItem> globalSearch(String searchTerm) {
+        return menuItemRepository.globalSearch(searchTerm);
+    }
+
+    @Override
+    public List<MenuItemResponse> findMenuItemsSortedByPrice(String ascOrDesc) {
+        if ("asc".equalsIgnoreCase(ascOrDesc)) {
+            return menuItemRepository.findAllByOrderByPriceAsc();
+        } else if ("desc".equalsIgnoreCase(ascOrDesc)) {
+            return menuItemRepository.findAllByOrderByPriceDesc();
+        } else {
+            throw new IllegalArgumentException("Invalid sorting direction. Use 'asc' or 'desc'.");
+        }
+    }
+
+    @Override
+    public List<MenuItemResponse> filterIsVegan(Boolean trueOrFalse) {
+        if (trueOrFalse) {
+            return menuItemRepository.findAllByVegetarianTrue();
+        } else {
+            return menuItemRepository.findAllByVegetarianFalse();
+        }
+
+    }
+
 
 }

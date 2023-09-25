@@ -1,6 +1,6 @@
 package adilet.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
@@ -15,6 +15,9 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "menu_item")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_item_seq")
@@ -40,6 +43,7 @@ public class MenuItem {
             CascadeType.REFRESH,
             CascadeType.DETACH
     })
+    @JsonManagedReference
     private List<Cheque> cheques;
     @OneToOne(mappedBy = "menuItem",
             cascade = {
@@ -55,6 +59,7 @@ public class MenuItem {
             CascadeType.REFRESH,
             CascadeType.DETACH
     })
+    @JsonBackReference
     private Subcategory subcategory;
 
 }

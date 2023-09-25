@@ -4,6 +4,7 @@ import adilet.enums.RestType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -31,5 +32,12 @@ public class Restaurant {
             cascade = CascadeType.ALL
     )
     private List<MenuItem> menuItems;
+
+    public void addUser(User user){
+        if(users==null){
+            users = new ArrayList<>();
+        }
+        users.add(user);
+    }
 
 }
